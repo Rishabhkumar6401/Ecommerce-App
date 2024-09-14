@@ -24,8 +24,16 @@ connectToDB()
 
 
 // middlewares
+const allowedOrigins = ['https://ecommerce-app-h6uw.vercel.app']; // Add all allowed origins here
+
 server.use(cors({
-  origin: '*', // Allow requests from any origin
+  origin: function(origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   exposedHeaders: ['X-Total-Count'],
   methods: ['GET', 'POST', 'PATCH', 'DELETE'],
