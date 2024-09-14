@@ -28,7 +28,9 @@ server.use(cors({
   origin: '*', // Allow requests from any origin
   credentials: true,
   exposedHeaders: ['X-Total-Count'],
-  methods: ['GET', 'POST', 'PATCH', 'DELETE']
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 }));
 server.use(express.json())
 server.use(cookieParser())
